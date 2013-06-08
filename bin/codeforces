@@ -5,13 +5,20 @@ module Codeforces
   $:.unshift File.dirname(__FILE__) + '/../lib'
   require 'optparse'
 
+  ARGV << '-h' if ARGV.empty?
   OptionParser.new do |o|
     @options = {}
     o.summary_width = 18
     o.on('--debug', 'Run in debug mode') { @options[:debug] = true }
+    o.on('--default', 'Use this settings as default')
+    o.on('-d', '--dir <dir>', 'Specify a directory') { |dir| @options[:directory] = dir }
+    o.on('-f', '--fast', 'Skip generating translations') { @options[:fast] = true }
     o.on('-h', '--help', 'Print this message') { puts o; exit }
+    o.on('-l', '--lang <x,y,z>', 'Limit template generation') { |xyz| @options[:languages] = xyz }
+    o.on('--pack', 'Delete all untouched templates')
     o.on('-p', '--parse <id>', 'Parse a contest') { |id| require 'parser'; Parser.parse id }
-    o.on('-t', '--test', 'Run test suite') {  }
-    o.on('-v', '--version', 'Print Sword’s version') { puts 'Codeforces ' + VERSION; exit }
+    o.on('--[no-]verbose', 'Run verbosely') { |v| @options[:debug] = v }
+    o.on('-v', '--version', 'Print generator’s version') { require 'version'; puts 'Codeforces ' + VERSION; exit }
+    o.on('-w', '--word', 'Name folders using latin script')
   end.parse!
 end
