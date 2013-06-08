@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+module Codeforces
+  $:.unshift File.dirname(__FILE__) + '/../lib'
+  require 'optparse'
+
+  OptionParser.new do |o|
+    @options = {}
+    o.summary_width = 18
+    o.on('--debug', 'Run in debug mode') { @options[:debug] = true }
+    o.on('-h', '--help', 'Print this message') { puts o; exit }
+    o.on('-p', '--parse <id>', 'Parse a contest') { |id| require 'parser'; Parser.parse id }
+    o.on('-t', '--test', 'Run test suite') {  }
+    o.on('-v', '--version', 'Print Sword’s version') { puts 'Codeforces ' + VERSION; exit }
+  end.parse!
+end
