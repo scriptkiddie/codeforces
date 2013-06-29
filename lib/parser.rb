@@ -4,6 +4,7 @@ module Codeforces
     require 'ruby-progressbar'
     require 'nokogiri'
     require 'open-uri'
+
     # Parses a context into an array by its’ ID
     # 
     # @return [Hash] with parsing results
@@ -38,6 +39,7 @@ module Codeforces
 
     # Converts a <pre>...</pre> node into a string
     # 
+    # @param node [Node] Nokogiri::HTML node
     # @return [String] processed text including newlines
     def pre(node)
       node.to_html.gsub(/<.+?>(.+)<\/.+?>/) { $1.gsub(/<br\/?>/, "\n") }

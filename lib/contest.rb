@@ -5,7 +5,7 @@ module Codeforces
     # @param options [Hash] options array from Executable module
     # @return [Contest] new instance of the class
     def initialize(options = {})
-      options.each { |k,v| instance_variable_set(k,v) }
+      options.each { |k,v| instance_variable_set("@#{k}", v) }
       throw ArgumentError unless @id
       @directory ||= '.'
       @languages ||= %w[ruby c python]

@@ -16,11 +16,13 @@ module Codeforces
       o.on('-f', '--fast', 'Skip generating translations') { options[:fast] = true }
       o.on('-h', '--help', 'Print this message') { puts o; exit }
       o.on('-l', '--lang <x,y,z>', 'Limit template generation') { |xyz| options[:languages] = xyz }
-      o.on('--pack', 'Delete all untouched templates')
+      o.on('--pack', 'Delete all untouched templates') { exit } # @todo
       o.on('-p', '--parse <id>', 'Parse a contest') { |id| options[:id] = id }
       o.on('-v', '--version', 'Print generator’s version') { require 'version'; puts 'Codeforces ' + VERSION; exit }
-      o.on('-w', '--word', 'Name folders using latin script')
+      o.on('-w', '--word', 'Name folders using latin script') { options[:word] = true }
     end.parse!
+
     require 'contest'
+    Contest.new(options)
   end
 end
