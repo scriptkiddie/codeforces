@@ -1,6 +1,7 @@
 module Codeforces
   # Used for generating 
   module Generator
+    require 'fileutils'
     def generate(parse_results)
       contest = './' + rename_contest(@id)
       create_folder contest
@@ -32,7 +33,7 @@ module Codeforces
     end
 
     def change_directory(path)
-      File.chdir path
+      File.chdir(path)
     end
 
     # @param path [String] relative path

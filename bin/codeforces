@@ -23,6 +23,8 @@ module Codeforces
     end.parse!
 
     require 'contest'
-    Contest.new(options).run!
+    contest = Contest.new(options)
+    contest.run if options[:id]
+    
   end
 end

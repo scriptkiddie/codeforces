@@ -16,9 +16,8 @@ module Codeforces
 
     # Runs the whole process using instance variables specified
     # @return [] 
-    def run!
+    def run
       generate @directory, parse(@id)
     end
-    alias run! run
   end
 end
