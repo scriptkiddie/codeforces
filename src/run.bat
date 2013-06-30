@@ -1,0 +1,1 @@
+for %%i in (??) do call test.bat %%i
