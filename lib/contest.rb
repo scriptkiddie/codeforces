@@ -8,7 +8,7 @@ module Codeforces
       options.each { |k,v| instance_variable_set("@#{k}", v) }
       throw ArgumentError unless @id
       @directory ||= '.'
-      @languages ||= %w[ruby c python]
+      @languages ||= %w[ruby c++ python]
     end
 
     include Generator

@@ -18,6 +18,7 @@ module Codeforces
       change_directory samples
 
       create_tests content[:input], content[:output]
+      create_checker(samples)
       change_directory '..'
     end
 
@@ -27,6 +28,12 @@ module Codeforces
         create_file "#{i}.out", output[i]
       end
     end
+
+    def create_checker(path)
+      if System::WINDOWS
+        copy_file("../doall.bat")
+        copy_file("../test.bat")
+      end
 
     def create_folder(path)
       FileUtils.mkdir(path)
@@ -41,6 +48,13 @@ module Codeforces
     # @return [Boolean] true if OK, false if something went wrong
     def create_file(path, content)
       File.write path, content
+    end
+
+    # @param path [String] relative path
+    # @param content [String] file content
+    # @return (see #create_file)
+    def copy_file(from, to = ".")
+      FileUtils.cp(from, to)
     end
 
     # @param name [String] task name

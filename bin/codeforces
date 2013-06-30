@@ -15,7 +15,7 @@ module Codeforces
       o.on('-d', '--dir <dir>', 'Specify a directory') { |dir| options[:directory] = dir }
       o.on('-f', '--fast', 'Skip generating translations') { options[:fast] = true }
       o.on('-h', '--help', 'Print this message') { puts o; exit }
-      o.on('-l', '--lang <x,y,z>', 'Limit template generation') { |xyz| options[:languages] = xyz }
+      o.on('-l', '--lang <x,y,z>', 'Limit template generation') { |z| options[:languages] = xyz }
       o.on('--pack', 'Delete all untouched templates') { exit } # @todo
       o.on('-p', '--parse <id>', 'Parse a contest') { |id| options[:id] = id }
       o.on('-v', '--version', 'Print generator’s version') { require 'version'; puts 'Codeforces ' + VERSION; exit }
