@@ -1,41 +1,45 @@
 module Codeforces
   # Used for generating 
   module Generator
-    # @param parse_results [Hash] hash received from Parser::parse()
-    # @return [Boolean] true if OK, false if something went wrong
     def generate(parse_results)
-
-      true
-      rescue false
+      contest = './' + rename_contest(@id)
+      create_folder contest
+      change_directory contest
+      parse_results.each { |problem| create_problem(problem) }
     end
 
-    def generate_test_suite()
+    def create_problem(problem)
+      samples = 'samples'.freeze
+      letter, content = problem
+
+      create_folder content[:name]
+      create_folder samples
+      change_directory samples
+
+      create_tests content[:input], content[:output]
+      change_directory '..'
     end
 
-    alias generate_test_suite generate_tests
-
-    def generate_test(input, output)
+    def create_tests(input, output)
+      input.each_index do |i|
+        create_file "#{i}.in", input[i]
+        create_file "#{i}.out", output[i]
+      end
     end
 
-    def generate_rakefile
-    end
-
-    def generate_batch
-    end
-
-    # @param path [String] relative path
-    # @return [Boolean] true if OK, false if something went wrong
     def create_folder(path)
-      true
-      rescue false
+      FileUtils.mkdir(path)
+    end
+
+    def change_directory(path)
+      File.chdir path
     end
 
     # @param path [String] relative path
     # @param content [String] file content
     # @return [Boolean] true if OK, false if something went wrong
     def create_file(path, content)
-      true
-      rescue false
+      File.write path, content
     end
 
     # @param name [String] task name
@@ -49,7 +53,11 @@ module Codeforces
     # @param id [Integer] contest id
     # @return [String] contest name
     def rename_contest(id)
-      require 'numbers_and_words' # unless respond_to
+      if @words
+        require 'numbers_and_words' unless 0.respond_to? :to_words
+        return id.to_words.gsub(/\s+/, '-')
+      end
+      id.to_s
     end
   end
 end

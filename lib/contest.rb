@@ -9,15 +9,16 @@ module Codeforces
       throw ArgumentError unless @id
       @directory ||= '.'
       @languages ||= %w[ruby c python]
-      run!
     end
 
     include Generator
     include Parser
 
     # Runs the whole process using instance variables specified
+    # @return [] 
     def run!
-      generate parse(@id)
+      generate @directory, parse(@id)
     end
+    alias run! run
   end
 end

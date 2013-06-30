@@ -23,6 +23,6 @@ module Codeforces
     end.parse!
 
     require 'contest'
-    Contest.new(options)
+    Contest.new(options).run!
   end
 end
