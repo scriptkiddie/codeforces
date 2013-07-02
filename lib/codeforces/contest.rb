@@ -1,6 +1,7 @@
+require 'codeforces/generator'
+require 'codeforces/parser'
+
 module Codeforces
-  require 'generator'
-  require 'parser'
   class Contest
     # @param options [Hash] options array from Executable module
     # @return [Contest] new instance of the class

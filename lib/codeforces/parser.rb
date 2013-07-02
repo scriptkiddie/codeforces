@@ -1,19 +1,19 @@
-# encoding: utf-8
+require 'open-uri'
+require 'rubygems'
+require 'ruby-progressbar'
+require 'nokogiri'
+
 module Codeforces
   module Parser
-    require 'ruby-progressbar'
-    require 'nokogiri'
-    require 'open-uri'
-
     # Parses a context into an array by its’ ID
     # 
     # @return [Hash] with parsing results
     # @example
     #   Parser.parse(321)
-    #   {"A"=> {
-    #       :name   => "A. Ciel and Robot",
-    #       :input  => ["2 2\nRU\n"],
-    #       :output => ["Yes\n"]}, ...}
+    #   # {"A"=> {
+    #   #    :name   => "A. Ciel and Robot",
+    #   #    :input  => ["2 2\nRU\n"],
+    #   #    :output => ["Yes\n"]}, ...}
     def parse(id)
       problems = {}
       bar = ProgressBar.create(title: 'Prolems', total: 26) # latin alphabet

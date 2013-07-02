@@ -1,7 +1,8 @@
+require 'fileutils'
+
 module Codeforces
   # Used for generating 
   module Generator
-    require 'fileutils'
     def generate(parse_results)
       contest = './' + rename_contest(@id)
       create_folder contest
@@ -30,10 +31,11 @@ module Codeforces
     end
 
     def create_checker(path)
-      if System::WINDOWS
+      if WINDOWS
         copy_file("../doall.bat")
         copy_file("../test.bat")
       end
+    end
 
     def create_folder(path)
       FileUtils.mkdir(path)

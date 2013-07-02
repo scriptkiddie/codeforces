@@ -1,30 +1,5 @@
 #!/usr/bin/env ruby
-# coding: utf-8
+$:.unshift File.dirname(__FILE__) + '/../lib'
 
-module Codeforces
-  module Executable
-    $:.unshift File.dirname(__FILE__) + '/../lib'
-    require 'optparse'
-
-    ARGV << '-h' if ARGV.empty?
-    options = {}
-    OptionParser.new do |o|
-      o.summary_width = 18
-      o.on('--debug', 'Run in debug mode') { options[:debug] = true }
-      o.on('--default', 'Use this settings as default')
-      o.on('-d', '--dir <dir>', 'Specify a directory') { |dir| options[:directory] = dir }
-      o.on('-f', '--fast', 'Skip generating translations') { options[:fast] = true }
-      o.on('-h', '--help', 'Print this message') { puts o; exit }
-      o.on('-l', '--lang <x,y,z>', 'Limit template generation') { |z| options[:languages] = xyz }
-      o.on('--pack', 'Delete all untouched templates') { exit } # @todo
-      o.on('-p', '--parse <id>', 'Parse a contest') { |id| options[:id] = id }
-      o.on('-v', '--version', 'Print generator’s version') { require 'version'; puts 'Codeforces ' + VERSION; exit }
-      o.on('-w', '--word', 'Name folders using latin script') { options[:word] = true }
-    end.parse!
-
-    require 'contest'
-    contest = Contest.new(options)
-    contest.run if options[:id]
-    
-  end
-end
+require 'codeforces/cli'
+Codeforces::CLI.new.run
