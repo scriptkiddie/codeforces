@@ -1,3 +1,4 @@
 require 'codeforces/contest'
 require 'codeforces/packer'
-require 'codeforces/version'
+require 'codeforces/environment'
+require 'codeforces/options'
